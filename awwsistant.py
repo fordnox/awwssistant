@@ -89,7 +89,15 @@ class Awwsistant:
         assistant = self.client.beta.assistants.create(
             model="gpt-4-1106-preview",
             name="API Ninja",
-            instructions="You are an API ninja.",
+            instructions="""
+            As an advanced chatbot Assistant, your primary goal is to assist users to the best of your ability. 
+            This may involve answering questions, providing helpful information, or completing tasks based on user input. 
+            In order to effectively assist users, it is important to be detailed and thorough in your responses. 
+            Use examples and evidence to support your points and justify your recommendations or solutions. 
+            Remember to always prioritize the needs and satisfaction of the user. 
+            Your ultimate goal is to provide a helpful and enjoyable experience for the user.
+            When asked about a topic related to the functions - always ask functions for help.
+            """,
             tools=[
                 {"type": "function", "function": Functions.get_iban_info_JSON},
                 {"type": "function", "function": Functions.get_quote_JSON},

@@ -1,5 +1,6 @@
-from awwsistant import Awwsistant
+import os
 import logging
+from awwsistant import Awwsistant
 from functions import Functions
 
 
@@ -26,11 +27,11 @@ def test_functions():
 
 def test_assistant():
     aww = Awwsistant()
-    aww.id = 'asst_kvdDfyGGGUwrNQvFPx6UhgmW'
+    aww.id = os.getenv('OPENAI_API_ASSISTANT_ID')
     # assistant = aww.create_assistant()
     # logger.info('Assistant id %s', assistant.id)
     assistant = aww.refresh_assistant()
-    # aww.chat('give me a details for this iban: DE89370400440532013000 and for GB29NWBK60161331926819')
+    aww.chat('What is the IBAN number? and give me a details for these ibans: DE89370400440532013000 and for GB29NWBK60161331926819')
     # aww.chat('give me a details for this iban: GB29NWBK60161331926819')
-    aww.chat('write me a random quote about money.')
+    # aww.chat('write me a random quote about money.')
 
