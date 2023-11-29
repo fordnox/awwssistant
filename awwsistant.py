@@ -23,7 +23,7 @@ class Awwsistant:
             tool_call_id = tool_call.id
             name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments)
-            logging.debug(f'Assistant requested {name}({arguments})')
+            logging.info(f'Assistant requested {name}({arguments})')
             output = getattr(Functions, name)(**arguments)
             tool_outputs.append({"tool_call_id": tool_call_id, "output": json.dumps(output)})
             logging.debug(f'Returning {output}')

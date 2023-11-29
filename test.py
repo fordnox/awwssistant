@@ -23,6 +23,7 @@ def test_functions():
     iban_info = functions.get_quote('art')
     logger.info('quote: %s', iban_info)
 
+
 def test_assistant():
     aww = Awwsistant()
     aww.id = 'asst_kvdDfyGGGUwrNQvFPx6UhgmW'

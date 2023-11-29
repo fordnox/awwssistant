@@ -22,7 +22,7 @@ run:
 	$(CMD_PYTHON) bot.py
 
 test:
-	./$(VENV)/bin/pytest test.py --log-cli-level info --disable-warnings
+	./$(VENV)/bin/pytest test.py -k test_assistant --log-cli-level info --disable-warnings
 
 t:
 	$(VENV)/bin/pytest test.py -s -k test_functions --log-cli-level info --disable-warnings

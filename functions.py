@@ -4,14 +4,19 @@ import string
 import random
 import requests
 
+
 class Functions:
 
     @staticmethod
-    def get_iban_info(iban: str):
+    def call_ninja_api(url):
         headers = {'X-Api-Key': os.environ.get('API_NINJA_KEY')}
-        url = 'https://api.api-ninjas.com/v1/iban?iban=' + iban
         r = requests.get(url, headers=headers)
         return r.json()
+
+    @staticmethod
+    def get_iban_info(iban: str):
+        url = 'https://api.api-ninjas.com/v1/iban?iban=' + iban
+        return Functions.call_ninja_api(url)
 
     get_iban_info_JSON = {
         "name": "get_iban_info",
@@ -29,10 +34,8 @@ class Functions:
 
     @staticmethod
     def get_quote(category: str):
-        headers = {'X-Api-Key': os.environ.get('API_NINJA_KEY')}
         url = 'https://api.api-ninjas.com/v1/quotes?category=' + category
-        r = requests.get(url, headers=headers)
-        data = r.json()
+        data = Functions.call_ninja_api(url)
         logging.debug('Quote: %s', data[0])
         return f'"{data[0]["quote"]}" - {data[0]["author"]}'
 
