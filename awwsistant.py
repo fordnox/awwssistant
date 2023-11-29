@@ -63,9 +63,10 @@ class Awwsistant:
             time.sleep(3)
 
         self.client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
-        new_messages = self.client.beta.threads.messages.list(thread_id=thread.id, order="asc")
-        for m in new_messages:
+        thread_messages = self.client.beta.threads.messages.list(thread_id=thread.id, order="asc")
+        for m in thread_messages:
             logger.warning("message: %s", m.content[0].text.value)
+        return thread_messages.data[1].content[0].text.value
 
     def refresh_assistant(self):
         if self.id is None:
