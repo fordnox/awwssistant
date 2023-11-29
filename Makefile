@@ -24,6 +24,9 @@ run:
 test:
 	./$(VENV)/bin/pytest test.py --log-cli-level info --disable-warnings
 
+t:
+	$(VENV)/bin/pytest test.py -s -k test_functions --log-cli-level info --disable-warnings
+
 clean:
 	rm -rf $(VENV)
 	rm -rf .pytest_cache

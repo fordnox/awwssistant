@@ -1,21 +1,17 @@
+import logging
+import os
 import string
 import random
-
+import requests
 
 class Functions:
 
     @staticmethod
     def get_iban_info(iban: str):
-        return {
-              "iban": iban,
-              "bank_name": "Deutsche Bank",
-              "account_number": "0532013000",
-              "bank_code": "20070000",
-              "country": "DE",
-              "checksum": "16",
-              "valid": True,
-              "bban": "200700000532013000"
-            }
+        headers = {'X-Api-Key': os.environ.get('API_NINJA_KEY')}
+        url = 'https://api.api-ninjas.com/v1/iban?iban=' + iban
+        r = requests.get(url, headers=headers)
+        return r.json()
 
     get_iban_info_JSON = {
         "name": "get_iban_info",
@@ -33,7 +29,12 @@ class Functions:
 
     @staticmethod
     def get_quote(category: str):
-        return f'Quote in category {category}: The best way to cheer yourself up is to try to cheer somebody else up.'
+        headers = {'X-Api-Key': os.environ.get('API_NINJA_KEY')}
+        url = 'https://api.api-ninjas.com/v1/quotes?category=' + category
+        r = requests.get(url, headers=headers)
+        data = r.json()
+        logging.debug('Quote: %s', data[0])
+        return f'"{data[0]["quote"]}" - {data[0]["author"]}'
 
     get_quote_JSON = {
         "name": "get_quote",
