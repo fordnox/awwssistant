@@ -30,7 +30,7 @@ def test_assistant():
     # assistant = aww.create_assistant()
     # logger.info('Assistant id %s', assistant.id)
     assistant = aww.refresh_assistant()
-    aww.chat('give me a details for this iban: DE89370400440532013000')
+    # aww.chat('give me a details for this iban: DE89370400440532013000 and for GB29NWBK60161331926819')
     # aww.chat('give me a details for this iban: GB29NWBK60161331926819')
-    # aww.chat('write me a random quote about money.')
+    aww.chat('write me a random quote about money.')
 
