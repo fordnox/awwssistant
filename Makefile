@@ -4,32 +4,24 @@
 include .env
 export
 
-# define the name of the virtual environment directory
-VENV := .venv
-CMD_PYTHON = ./$(VENV)/bin/python3
-
 # default target, when make executed without arguments
-all: venv run
+all: install run
 
-$(VENV)/bin/activate: requirements.txt
-	python3 -m venv $(VENV)
-	./$(VENV)/bin/pip3 install -r requirements.txt
-
-# venv is a shortcut target
-venv: $(VENV)/bin/activate
+install:
+	poetry lock
+	poetry install --with dev
 
 run:
-	$(CMD_PYTHON) bot.py
+	poetry run python bot.py
 
 test:
-	./$(VENV)/bin/pytest test.py -k test_assistant --log-cli-level info --disable-warnings
+	poetry run pytest test.py -k test_assistant --log-cli-level info --disable-warnings
 
 t:
-	$(VENV)/bin/pytest test.py -s -k test_functions --log-cli-level info --disable-warnings
+	poetry run pytest test.py -s -k test_functions --log-cli-level info --disable-warnings
 
 clean:
-	rm -rf $(VENV)
 	rm -rf .pytest_cache
 	find . -type f -name '*.pyc' -delete
 
-.PHONY: all venv run test clean
+.PHONY: all install run test clean
