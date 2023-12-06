@@ -18,7 +18,7 @@ test:
 	poetry run pytest test.py -k test_assistant --log-cli-level info --disable-warnings
 
 t:
-	poetry run pytest test.py -s -k test_functions --log-cli-level info --disable-warnings
+	poetry run pytest test.py -s -k test_vision --log-cli-level info --disable-warnings
 
 clean:
 	rm -rf .pytest_cache

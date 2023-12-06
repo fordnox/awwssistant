@@ -2,6 +2,7 @@ import os
 import logging
 from awwsistant import Awwsistant
 from functions import Functions
+from vision import VisionAssistant
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -26,7 +27,7 @@ def test_functions():
 
 
 def test_assistant():
-    aww = Awwsistant()
+    aww = VisionAssistant()
     aww.id = os.getenv('OPENAI_API_ASSISTANT_ID')
     # assistant = aww.create_assistant()
     # logger.info('Assistant id %s', assistant.id)
@@ -34,4 +35,9 @@ def test_assistant():
     aww.chat('What is the IBAN number? and give me a details for these ibans: DE89370400440532013000 and for GB29NWBK60161331926819')
     # aww.chat('give me a details for this iban: GB29NWBK60161331926819')
     # aww.chat('write me a random quote about money.')
+
+
+def test_vision():
+    v = VisionAssistant()
+    v.describe_image('1985_European_GP_Stefan_Johansson_01.jpg')
 
