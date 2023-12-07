@@ -1,10 +1,8 @@
 import os
 import logging
 import json
-from awwsistant import Awwsistant
-from functions import Functions
-from vision import VisionAssistant
 from pathlib import Path
+from awwsistant import Awwsistant, Functions, VisionAssistant
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -46,12 +44,12 @@ def test_assistant():
 
 def test_vision():
     v = VisionAssistant()
-    r = v.describe_image(Path('images/1985_European_GP_Stefan_Johansson_01.jpg'))
+    r = v.describe_image(Path('../images/1985_European_GP_Stefan_Johansson_01.jpg'))
     logger.info('Result: %s', r)
 
 
 def test_read_article():
     v = VisionAssistant()
-    r = v.get_article_from_image(Path('images/magazine_page_2.jpg'))
+    r = v.get_article_from_image(Path('../images/magazine_page_2.jpg'))
     logger.info('Result: %s', json.dumps(r, indent=4))
 

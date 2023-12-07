@@ -4,8 +4,8 @@
 import logging
 import os
 import locale
-from awwsistant import Awwsistant
-from vision import VisionAssistant
+from .awwsistant import Awwsistant
+from .vision import VisionAssistant
 from pathlib import Path
 
 from telegram import BotCommand, Update
@@ -85,6 +85,3 @@ def main() -> None:
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
-
-if __name__ == "__main__":
-    main()

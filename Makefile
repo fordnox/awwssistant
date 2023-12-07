@@ -12,13 +12,13 @@ install:
 	poetry install --with dev
 
 run:
-	poetry run python bot.py
+	poetry run python -m awwsistant
 
 test:
-	poetry run pytest test.py -k test_assistant --log-cli-level info --disable-warnings
+	poetry run pytest tests -k test_assistant --log-cli-level info --disable-warnings
 
 t:
-	poetry run pytest test.py -s -k test_read_article --log-cli-level info --disable-warnings
+	poetry run pytest tests -s -k test_functions --log-cli-level info --disable-warnings
 
 clean:
 	rm -rf .pytest_cache

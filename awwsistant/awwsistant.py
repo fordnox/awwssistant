@@ -2,7 +2,7 @@ import time
 import json
 import logging
 from openai import OpenAI
-from functions import Functions
+from .functions import Functions
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
