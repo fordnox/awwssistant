@@ -101,7 +101,7 @@ class Awwsistant:
             tools=[
                 {"type": "function", "function": Functions.get_iban_info_JSON},
                 {"type": "function", "function": Functions.get_quote_JSON},
-                {"type": "function", "function": Functions.get_whois_info},
+                {"type": "function", "function": Functions.get_whois_info_JSON},
                 {"type": "function", "function": Functions.get_vin_info_JSON},
             ],
         )
