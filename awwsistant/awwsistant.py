@@ -1,7 +1,9 @@
-import time
 import json
 import logging
+import time
+
 from openai import OpenAI
+
 from .functions import Functions
 
 logging.basicConfig(

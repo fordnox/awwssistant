@@ -16,6 +16,7 @@ run:
 
 lint:
 	poetry run black .
+	poetry run isort .
 
 test:
 	poetry run pytest tests -k test_assistant --log-cli-level info --disable-warnings

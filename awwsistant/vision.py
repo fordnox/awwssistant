@@ -1,7 +1,8 @@
-from pathlib import Path
-import logging
-from openai import OpenAI
 import base64
+import logging
+from pathlib import Path
+
+from openai import OpenAI
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO

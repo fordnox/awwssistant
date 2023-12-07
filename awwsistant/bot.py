@@ -1,22 +1,18 @@
 #!/usr/bin/env python
 # pylint: disable=unused-argument
 
+import locale
 import logging
 import os
-import locale
-from .awwsistant import Awwsistant
-from .vision import VisionAssistant
 from pathlib import Path
 
 from telegram import BotCommand, Update
 from telegram.constants import ParseMode
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    ContextTypes,
-    MessageHandler,
-    filters,
-)
+from telegram.ext import (Application, CommandHandler, ContextTypes,
+                          MessageHandler, filters)
+
+from .awwsistant import Awwsistant
+from .vision import VisionAssistant
 
 # Enable logging
 logging.basicConfig(
