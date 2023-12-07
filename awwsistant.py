@@ -101,8 +101,8 @@ class Awwsistant:
             tools=[
                 {"type": "function", "function": Functions.get_iban_info_JSON},
                 {"type": "function", "function": Functions.get_quote_JSON},
-                {"type": "function", "function": Functions.get_random_digit_JSON},
-                {"type": "function", "function": Functions.get_random_letters_JSON}
+                {"type": "function", "function": Functions.get_whois_info},
+                {"type": "function", "function": Functions.get_vin_info_JSON},
             ],
         )
         logging.info("new assistant id: %s", assistant.id)
