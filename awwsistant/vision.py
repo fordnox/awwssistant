@@ -3,20 +3,21 @@ import logging
 from openai import OpenAI
 import base64
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 logger = logging.getLogger(__name__)
 
 
 # https://platform.openai.com/docs/guides/vision
 class VisionAssistant:
-
     def __init__(self):
         self.client = OpenAI()
 
     @staticmethod
     def encode_image(image_path: Path):
         with open(image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
+            return base64.b64encode(image_file.read()).decode("utf-8")
 
     def get_article_from_image(self, image_path: Path):
         base64_image = self.encode_image(image_path)

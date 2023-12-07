@@ -26,26 +26,33 @@ logging.basicConfig(
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
-locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 aww = Awwsistant()
-aww.id = os.getenv('OPENAI_API_ASSISTANT_ID')
+aww.id = os.getenv("OPENAI_API_ASSISTANT_ID")
 aww.refresh_assistant()
 
 vision = VisionAssistant()
 
+
 async def post_init(application: Application):
-    await application.bot.set_my_commands([
-        BotCommand("/start", "Start new dialog"),
-    ])
+    await application.bot.set_my_commands(
+        [
+            BotCommand("/start", "Start new dialog"),
+        ]
+    )
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    reply_text = "Hello there! I'm a bot that can test custom OpenAI Functions. Try me out!"
+    reply_text = (
+        "Hello there! I'm a bot that can test custom OpenAI Functions. Try me out!"
+    )
     await update.message.reply_text(reply_text)
 
 
-async def handle_photo_upload(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def handle_photo_upload(
+    update: Update, context: ContextTypes.DEFAULT_TYPE
+) -> None:
     """Stores the photo and asks for a location."""
     username = update.effective_user.username
     message_id = update.message.message_id
@@ -58,7 +65,9 @@ async def handle_photo_upload(update: Update, context: ContextTypes.DEFAULT_TYPE
     await msg_id.edit_text(response)
 
 
-async def handle_all_messages(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+async def handle_all_messages(
+    update: Update, context: ContextTypes.DEFAULT_TYPE
+) -> None:
     logger.debug("handle: %s", update)
     waiting_message = await update.message.reply_text("Please wait while I think...")
     response = aww.chat(update.message.text)
@@ -71,7 +80,7 @@ def main() -> None:
     # Create the Application and pass it your bot's token.
     application = (
         Application.builder()
-        .token(os.getenv('TELEGRAM_TOKEN'))
+        .token(os.getenv("TELEGRAM_TOKEN"))
         .arbitrary_callback_data(True)
         .post_init(post_init)
         .build()
@@ -84,4 +93,3 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(allowed_updates=Update.ALL_TYPES)
-

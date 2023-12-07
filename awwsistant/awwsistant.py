@@ -4,13 +4,14 @@ import logging
 from openai import OpenAI
 from .functions import Functions
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
 logger = logging.getLogger(__name__)
 
 
 # https://platform.openai.com/docs/assistants/tools/defining-functions
 class Awwsistant:
-
     def __init__(self):
         self.id = None
         self.assistant = None
@@ -23,13 +24,15 @@ class Awwsistant:
             tool_call_id = tool_call.id
             name = tool_call.function.name
             arguments = json.loads(tool_call.function.arguments)
-            logging.info(f'Assistant requested {name}({arguments})')
+            logging.info(f"Assistant requested {name}({arguments})")
             output = getattr(Functions, name)(**arguments)
-            tool_outputs.append({"tool_call_id": tool_call_id, "output": json.dumps(output)})
-            logging.debug(f'Returning {output}')
-        self.client.beta.threads.runs.submit_tool_outputs(thread_id=run.thread_id,
-                                                          run_id=run.id,
-                                                          tool_outputs=tool_outputs)
+            tool_outputs.append(
+                {"tool_call_id": tool_call_id, "output": json.dumps(output)}
+            )
+            logging.debug(f"Returning {output}")
+        self.client.beta.threads.runs.submit_tool_outputs(
+            thread_id=run.thread_id, run_id=run.id, tool_outputs=tool_outputs
+        )
 
     def chat(self, message):
         if self.assistant is None:
@@ -44,16 +47,14 @@ class Awwsistant:
             ]
         )
         run = self.client.beta.threads.runs.create(
-            thread_id=thread.id,
-            assistant_id=assistant.id
+            thread_id=thread.id, assistant_id=assistant.id
         )
 
-        while run.status != 'completed':
+        while run.status != "completed":
             run = self.client.beta.threads.runs.retrieve(
-                thread_id=thread.id,
-                run_id=run.id
+                thread_id=thread.id, run_id=run.id
             )
-            if run.status == 'requires_action':
+            if run.status == "requires_action":
                 self.run_action(run)
             elif run.status == "failed":
                 logger.error(f"The run failed... API probably down again...")
@@ -63,7 +64,9 @@ class Awwsistant:
             time.sleep(3)
 
         self.client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
-        thread_messages = self.client.beta.threads.messages.list(thread_id=thread.id, order="asc")
+        thread_messages = self.client.beta.threads.messages.list(
+            thread_id=thread.id, order="asc"
+        )
         for m in thread_messages:
             logger.warning("message: %s", m.content[0].text.value)
         return thread_messages.data[1].content[0].text.value

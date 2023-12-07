@@ -5,7 +5,7 @@ include .env
 export
 
 # default target, when make executed without arguments
-all: install run
+all: install lint
 
 install:
 	poetry lock
@@ -13,6 +13,9 @@ install:
 
 run:
 	poetry run python -m awwsistant
+
+lint:
+	poetry run black .
 
 test:
 	poetry run pytest tests -k test_assistant --log-cli-level info --disable-warnings
@@ -24,4 +27,4 @@ clean:
 	rm -rf .pytest_cache
 	find . -type f -name '*.pyc' -delete
 
-.PHONY: all install run test clean
+.PHONY: all install run lint test t clean
