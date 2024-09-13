@@ -92,7 +92,7 @@ class Awwsistant:
 
     def create_assistant(self):
         assistant = self.client.beta.assistants.create(
-            model="gpt-4-1106-preview",
+            model="gpt-4o-mini",
             name="API Ninja",
             instructions="""
             As an advanced chatbot Assistant, your primary goal is to assist users to the best of your ability. 
