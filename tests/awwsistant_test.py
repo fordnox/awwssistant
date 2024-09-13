@@ -32,12 +32,16 @@ def test_functions():
     iban_info = functions.get_quote("art")
     logger.info("quote: %s", iban_info)
 
+    pic = functions.get_picture()
+    logger.info("pic url: %s", pic)
+
 
 def test_assistant():
     aww = Awwsistant()
     aww.id = os.getenv("OPENAI_API_ASSISTANT_ID")
     # assistant = aww.create_assistant()
     # logger.info('Assistant id %s', assistant.id)
+    # assistant = aww.update_assistant()
     assistant = aww.refresh_assistant()
     aww.chat(
         "What is the IBAN number? and give me a details for these ibans: DE89370400440532013000 and for GB29NWBK60161331926819"

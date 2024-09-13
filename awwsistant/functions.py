@@ -71,6 +71,22 @@ class Functions:
     }
 
     @staticmethod
+    def get_picture(description: str = ""):
+        url = "https://picsum.photos/200/300"
+        return url
+
+    get_picture_JSON = {
+        "name": "get_picture",
+        "description": "Returns random picture.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "description": {"type": "string", "description": "Picture description"},
+            },
+        },
+    }
+
+    @staticmethod
     def get_quote(category: str):
         url = "https://api.api-ninjas.com/v1/quotes?category=" + category
         data = Functions.call_ninja_api(url)
