@@ -14,6 +14,9 @@ install:
 run:
 	poetry run python -m awwsistant
 
+agent:
+	poetry run python -m swarmistant
+
 lint:
 	poetry run black .
 	poetry run isort .
