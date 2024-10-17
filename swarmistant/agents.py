@@ -16,10 +16,3 @@ agent_b = Agent(
     name="Agent B",
     instructions="Only speak in Haikus.",
 )
-
-response = client.run(
-    agent=agent_a,
-    messages=[{"role": "user", "content": "I want to talk to agent B."}],
-)
-
-print(response.messages[-1]["content"])
