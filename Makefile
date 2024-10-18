@@ -17,6 +17,9 @@ run:
 agent:
 	poetry run python -m swarmistant
 
+airline:
+	poetry run python -m openai_airline
+
 lint:
 	poetry run black .
 	poetry run isort .
